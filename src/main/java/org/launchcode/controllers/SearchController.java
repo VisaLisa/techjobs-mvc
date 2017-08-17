@@ -24,4 +24,22 @@ public class SearchController {
 
     // TODO #1 - Create handler to process search request and display results
 
+    @RequestMapping(value = "results")// producing results
+    public String search(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
+
+        ArrayList<HashMap<String, String>> jobs;
+
+        if (searchType.equals("all") || searchType.equals("")) // search "all" or searching word
+        {
+            jobs = JobData.findByValue(searchType); // search by value
+        } else {
+            jobs = JobData.findByColumnAndValue(searchType, searchTerm); //search by column and value
+        }
+
+        model.addAttribute("columns", ListController.columnChoices); // attribute: column
+        model.addAttribute("jobs", jobs); // attribute jobs
+
+        return "search";
+    }
+
 }
