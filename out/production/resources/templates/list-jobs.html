@@ -12,15 +12,19 @@
 
     <!-- TODO #3 - Use the same list display from search.html -->
 
-    <table class="job-listing" th:each="job : ${jobs}">
+    <div>
+        <h2 th:if="${jobs}" th:text="${jobs.size()} + ' Result(s)'">  </h2>
 
-        <tr th:each="field : ${job}">
+        <table class="job-listing" th:each="job : ${jobs}">
 
-            <td th:text="${field.key}"></td>
-            <td th:text="${field.value}"></td>
-        </tr>
+            <tr th:each="field : ${job}">
 
-    </table>
+                <td th:text="${field.key}"></td>
+                <td th:text="${field.value}"></td>
+            </tr>
+
+        </table>
+    </div>
 </div>
 
 </body>
